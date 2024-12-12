@@ -1,13 +1,35 @@
 const Car = require('../models/car');
 
-// Get all cars with pagination
+// Get all cars with pagination and search functionality
 const getCars = async (req, res) => {
-  const { page = 1, limit = 16 } = req.query;
+  const { page = 1, limit = 16, search, sortBy, sortOrder } = req.query;
+
   try {
-    const cars = await Car.find()
+    let query = {};
+    let sort = {};
+
+    // If a search term is provided, include it in the query
+    if (search) {
+      query = {
+        $or: [
+          { make: { $regex: search, $options: 'i' } },  // Search by make (case-insensitive)
+          { model: { $regex: search, $options: 'i' } }, // Search by model (case-insensitive)
+        ]
+      };
+    }
+
+    // Handle sorting if parameters are provided
+    if (sortBy) {
+      sort[sortBy] = sortOrder === 'desc' ? -1 : 1; // Ascending or descending order
+    }
+
+    // Fetch cars with pagination and sorting
+    const cars = await Car.find(query)
       .limit(limit * 1)
       .skip((page - 1) * limit)
+      .sort(sort)
       .exec();
+
     res.json(cars);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -25,22 +47,107 @@ const getCarById = async (req, res) => {
   }
 };
 
-// Add a new car
-const addCar = async (req, res) => {
-  const newCar = new Car(req.body);
+// Get top 4 most expensive cars based on price
+const getFeaturedCars = async (req, res) => {
   try {
-    await newCar.save();
-    res.status(201).json(newCar);
+    const cars = await Car.find().sort({ price: -1 }).limit(6).exec(); // Sort by price descending
+    if (!cars || cars.length === 0) {
+      return res.status(404).json({ message: 'No featured cars found' });
+    }
+    res.json(cars); // Send the cars as a response
+  } catch (err) {
+    console.error('Error fetching featured cars:', err); // Log the error for debugging
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Get all unique car makes
+const getMakes = async (req, res) => {
+  try {
+    // Apply case-insensitive search for all makes
+    const makes = await Car.find({}).distinct('make').collation({ locale: 'en', strength: 2 });
+
+    // If no makes found, return an appropriate message
+    if (!makes || makes.length === 0) {
+      return res.status(404).json({ message: "No makes found" });
+    }
+
+    res.json(makes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+// Get all models for a given make
+const getModelsByMake = async (req, res) => {
+  const { make } = req.params;
+  
+  try {
+    // Find all cars matching the provided make (case-insensitive)
+    const cars = await Car.find({ make: { $regex: new RegExp(make, 'i') } });
+
+    // If no cars found, return a custom message
+    if (!cars || cars.length === 0) {
+      return res.status(404).json({ message: `No cars found for make: ${make}` });
+    }
+
+    // Return the full details of all matching cars
+    res.json(cars);
+  } catch (err) {
+    // Handle server errors
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Create a new car
+const createCar = async (req, res) => {
+  try {
+    const { 
+      make, 
+      model, 
+      price, 
+      year, 
+      color, 
+      kilometers, 
+      vin, 
+      images 
+    } = req.body; // Ensure all required fields are extracted
+
+    // Create a new car document
+    const car = new Car({ 
+      make, 
+      model, 
+      price, 
+      year, 
+      color, 
+      kilometers, 
+      vin, 
+      images // Optional if not always provided
+    });
+
+    // Save to the database
+    const savedCar = await car.save();
+
+    res.status(201).json(savedCar);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-// Update a car by ID
+
+// Update an existing car by ID
 const updateCar = async (req, res) => {
   try {
-    const updatedCar = await Car.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updatedCar) return res.status(404).json({ message: 'Car not found' });
+    const { id } = req.params;
+
+    // Find the car and update it with new data
+    const updatedCar = await Car.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+
+    if (!updatedCar) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+
     res.json(updatedCar);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -50,12 +157,20 @@ const updateCar = async (req, res) => {
 // Delete a car by ID
 const deleteCar = async (req, res) => {
   try {
-    const deletedCar = await Car.findByIdAndDelete(req.params.id);
-    if (!deletedCar) return res.status(404).json({ message: 'Car not found' });
+    const { id } = req.params;
+
+    // Find the car by ID and delete it
+    const deletedCar = await Car.findByIdAndDelete(id);
+
+    if (!deletedCar) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+
     res.json({ message: 'Car deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-module.exports = { getCars, getCarById, addCar, updateCar, deleteCar };
+
+module.exports = { getCars, getCarById, getFeaturedCars, getMakes, getModelsByMake, createCar, updateCar, deleteCar };
