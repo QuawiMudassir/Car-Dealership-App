@@ -1,11 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const carRoutes = require('./routes/carRoutes');
 
 const app = express();
 
+
 // Middleware
 app.use(express.json());
+
+// Enable CORS for all routes and all origins
+app.use(cors());
 
 // Routes
 app.use('/api/cars', carRoutes);
