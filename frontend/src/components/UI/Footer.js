@@ -1,4 +1,3 @@
-// src/components/Footer.js
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -8,29 +7,76 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4">
         {/* Navigation Links */}
         <div className="flex justify-center space-x-8 mb-6">
-          <Link to="/">Home</Link>
-          <Link to="/cars">Cars</Link>
-          <a href="/404">Contact Us</a>
-          <a href="/404">Jobs</a>
-          <a href="/404">Accessibility</a>
+          <Link to="/" className="hover:text-white transition-colors">
+            Home
+          </Link>
+          <Link to="/cars" className="hover:text-white transition-colors">
+            Cars
+          </Link>
+          <a
+            href="/404"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            Contact Us
+          </a>
+          <a
+            href="/404"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            Jobs
+          </a>
+          <a
+            href="/404"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            Accessibility
+          </a>
         </div>
 
-        {/* Social Media Icons */}
+        
         <div className="flex justify-center space-x-6 mb-6">
-          <a href="https://facebook.com" target="_blank" rel="noreferrer">
-            {/* Facebook Icon */}
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            <i className="fab fa-facebook-f"></i>
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
-            {/* Instagram Icon */}
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            <i className="fab fa-instagram"></i>
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer">
-            {/* Twitter Icon */}
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            <i className="fab fa-twitter"></i>
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-            {/* LinkedIn Icon */}
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            <i className="fab fa-linkedin-in"></i>
           </a>
-          <a href="https://youtube.com" target="_blank" rel="noreferrer">
-            {/* YouTube Icon */}
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            <i className="fab fa-youtube"></i>
           </a>
         </div>
 
