@@ -79,3 +79,22 @@ npm install
 ### **Start the Frontend Development Server**  
 Start the frontend server:  
 npm start
+
+### **API Endpoints**  
+The backend provides the following endpoints:  
+
+- **GET** `/api/cars/`: Get a list of all cars available in the dealership.  
+- **GET** `/api/cars/:id`: Get details of a specific car by ID.  
+- **GET** `/api/cars/featured/premium`: Get premium cars.  
+- **POST** `/api/cars/`: Add a new car to the inventory.  
+- **PUT** `/api/cars/:id`: Update an existing car's details.  
+- **DELETE** `/api/cars/:id`: Remove a car from the inventory.  
+- **GET** `/makes/brands`: Search for all makes.  
+- **GET** `/models/:make`: Search for cars by make.  
+
+### Contributors:
+- Ghazala Anjum  
+- Mohammed Abdul Quawi Mudassir  
+- Preet Ojha  
+- RobinPreet Kaur  
+
