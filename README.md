@@ -80,6 +80,8 @@ npm install
 Start the frontend server:  
 npm start
 
+The frontend should be accessible at [http://localhost:3000](http://localhost:3000) || [http://localhost:3001](http://localhost:3001).
+
 ### **API Endpoints**  
 The backend provides the following endpoints:  
 
