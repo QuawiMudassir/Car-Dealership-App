@@ -1,6 +1,6 @@
 const Car = require('../models/car');
 
-// Get all cars with pagination and search functionality
+// Fetch all cars with pagination and search functionality
 const getCars = async (req, res) => {
   const { page = 1, limit = 16, search, sortBy, sortOrder } = req.query;
 
@@ -36,7 +36,7 @@ const getCars = async (req, res) => {
   }
 };
 
-// Get car by ID
+// Fetch a single car by its ID
 const getCarById = async (req, res) => {
   try {
     const car = await Car.findById(req.params.id);
@@ -47,7 +47,7 @@ const getCarById = async (req, res) => {
   }
 };
 
-// Get top 4 most expensive cars based on price
+// Fetch top 6 most expensive cars based on price
 const getFeaturedCars = async (req, res) => {
   try {
     const cars = await Car.find().sort({ price: -1 }).limit(6).exec(); // Sort by price descending
@@ -61,7 +61,7 @@ const getFeaturedCars = async (req, res) => {
   }
 };
 
-// Get all unique car makes
+// Fetch all unique car makes/brands
 const getMakes = async (req, res) => {
   try {
     // Apply case-insensitive search for all makes
@@ -78,11 +78,10 @@ const getMakes = async (req, res) => {
   }
 };
 
-
-// Get all models for a given make
+// Fetch all models for a specific make
 const getModelsByMake = async (req, res) => {
   const { make } = req.params;
-  
+
   try {
     // Find all cars matching the provided make (case-insensitive)
     const cars = await Car.find({ make: { $regex: new RegExp(make, 'i') } });
@@ -100,7 +99,7 @@ const getModelsByMake = async (req, res) => {
   }
 };
 
-// Create a new car
+// Add a new car to the database
 const createCar = async (req, res) => {
   try {
     const { 
@@ -135,8 +134,7 @@ const createCar = async (req, res) => {
   }
 };
 
-
-// Update an existing car by ID
+// Update an existing car by its ID
 const updateCar = async (req, res) => {
   try {
     const { id } = req.params;
@@ -154,7 +152,7 @@ const updateCar = async (req, res) => {
   }
 };
 
-// Delete a car by ID
+// Remove a car from the database by its ID
 const deleteCar = async (req, res) => {
   try {
     const { id } = req.params;
@@ -171,6 +169,5 @@ const deleteCar = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
 
 module.exports = { getCars, getCarById, getFeaturedCars, getMakes, getModelsByMake, createCar, updateCar, deleteCar };

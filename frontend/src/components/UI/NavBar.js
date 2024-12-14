@@ -51,7 +51,11 @@ const NavLeft = ({ setIsOpen }) => {
       <Logo />
       <NavLink text="Home" to="/" />
       <NavLink text="All Cars" to="/cars" />
+<<<<<<< HEAD
       <NavLink text="Contact Us" to="/Contact" />
+=======
+      <NavLink text="Contact Us" to="/404" />
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
     </div>
   );
 };

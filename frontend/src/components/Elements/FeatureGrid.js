@@ -25,7 +25,11 @@ const RevealCards = () => {
   return (
     <section className="p-8 bg-white">
       <h2 className="block text-center text-6xl font-bold text-teal-600 mb-6">
+<<<<<<< HEAD
         Featured Cars
+=======
+        Featured
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
         {featuredCars.length > 0 ? (

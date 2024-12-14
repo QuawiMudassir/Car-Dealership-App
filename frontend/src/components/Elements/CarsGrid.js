@@ -66,6 +66,7 @@ const CarGrid = () => {
         </div>
 
         {/* Grid for Displaying Cars */}
+<<<<<<< HEAD
         <div className="grid grid-cols-1 gap-x-1 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-10">
   {cars && cars.length > 0 ? (
     cars.map((car) => (
@@ -91,6 +92,30 @@ const CarGrid = () => {
   )}
 </div>
 
+=======
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {cars && cars.length > 0 ? (
+            cars.map((car) => (
+              <Link to={`/cars/${car._id}`} key={car._id}> {/* Link to car details page */}
+                <div className="group bg-white rounded-lg shadow-lg p-4">
+                  {/* Car Image */}
+                  <img
+                    src={car.images[0] || 'https://via.placeholder.com/300'} // Use a placeholder if no image URL
+                    alt={car.make + ' ' + car.model}
+                    className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75"
+                  />
+                  {/* Car Details */}
+                  <h3 className="mt-4 text-lg font-medium text-gray-900">{car.make} {car.model}</h3>
+                  <p className="mt-1 text-sm text-gray-700">Price: ${car.price}</p>
+                  <p className="text-sm text-gray-500">Year: {car.year}</p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p>No cars available</p>
+          )}
+        </div>
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
 
         {/* Pagination */}
         <div className="flex justify-center mt-8">

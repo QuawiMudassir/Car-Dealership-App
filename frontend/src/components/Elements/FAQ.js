@@ -12,10 +12,17 @@ const FAQ = () => {
         </h3>
         <Question title="Meet Our Team" defaultOpen>
         <p>
+<<<<<<< HEAD
             1. Ghazala Anjum - C0905815<br />
             2. Mohammed Abdul Quawi Mudassir - C0911573 <br />
             3. Preet Ojha - C0904332<br />
             4. RobinPreet Kaur - C0913264
+=======
+            1. Ghazala Anjum <br />
+            2. Mohammed Abdul Quawi Mudassir - C0911573 <br />
+            3. Preet Ojha <br />
+            4. RobinPreet Kaur
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
         </p>
 
         </Question>

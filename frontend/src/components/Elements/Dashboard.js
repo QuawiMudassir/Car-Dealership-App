@@ -22,7 +22,11 @@ const Dashboard = () => {
         if (currentPage === 1) {
           setCars(response.data); // Set the cars on the first page
         } else {
+<<<<<<< HEAD
           setCars((prevCars) => [...prevCars, ...response.data]); 
+=======
+          setCars((prevCars) => [...prevCars, ...response.data]); // Append new cars on subsequent pages
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
         }
       } catch (error) {
         console.error('Error fetching cars:', error);
@@ -31,7 +35,11 @@ const Dashboard = () => {
       }
     };
     fetchCars();
+<<<<<<< HEAD
   }, [currentPage]);
+=======
+  }, [currentPage]); // Fetch cars whenever the page changes
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
 
   const handleAddCar = () => {
     window.location.href = '/AddCar';
@@ -71,7 +79,11 @@ const Dashboard = () => {
         <div className="sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">Cars</h1>
           <p className="mt-2 text-sm text-gray-700">
+<<<<<<< HEAD
             A list of all available cars in inventory.
+=======
+            A list of all cars in your inventory including their name, type, price, and status.
+>>>>>>> 710f0361d3d9839ebb7317f55ffea60522df4efa
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
