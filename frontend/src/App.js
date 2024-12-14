@@ -9,6 +9,7 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import AddCar from './pages/AddCar/AddCar';
 import EditCar from './pages/EditCar/EditCar';
 import Footer from './components/UI/Footer';
+import ContactUs from './pages/ContactUs/ContactUs'
 import NotFound from './pages/NotFound/NotFound'
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/AddCar" element={<AddCar />} />
           <Route path="/EditCar/:id" element={<EditCar />} />
+          <Route path="/Contact" element={<ContactUs />} />
           <Route path="/404" element={<NotFound />} />
         </Routes>
         <Footer />
